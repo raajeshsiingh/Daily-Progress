@@ -125,6 +125,35 @@ int duplicateNumberIn(int arr[], int size) {
     cout << endl;
 }
 
+vector<int> intersection(int arr1[], int arr2[], int size1, int size2) {
+
+    vector<int> result = {};
+
+    for (int i=0; i<size1; i++) {
+        for (int j=0; j<size2; j++) {
+            if (arr1[i] < arr2[j])
+                break;
+                
+            if (arr1[i] == arr2[j]) {
+                result.push_back(arr1[i]);
+            }
+        }
+    }
+
+    return result;
+}
+
+vector<vector<int>> pairSum(int arr[], int size, int total) {
+    vector<vector<int>> result;
+    for(int i=0; i<size; i++) {
+        for(int j=i+1; j<size; j++) {
+            if(arr[i] + arr[j] == total) {
+                result.push_back({min(arr[i], arr[j]), max(arr[i], arr[j])});
+            }
+        }
+    } 
+}
+
 // Main function
 int main() {
     int n;
@@ -176,10 +205,34 @@ int main() {
     bool isUniqueOccurrence = uniqueOccOfElementsIn(dummyArr, 4);
     cout << "Unique Occurrence: " << (isUniqueOccurrence ? "True" : "False") << endl;
 
-    // int duplicateNumber = duplicateNumberIn(dummyArr, 4);
-    // cout << "Duplicate number: " << duplicateNumber << endl;
+    int duplicateNumber = duplicateNumberIn(dummyArr, 4);
+    cout << "Duplicate number: " << duplicateNumber << endl;
 
     findAllDuplicatesIn(dummyArr, 4);
+
+    cout << endl;
+
+    int intersectionTestArr1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int intersectionTestArr2[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+
+    vector<int> resultVector = intersection(intersectionTestArr1, intersectionTestArr2, 10, 10);
+
+    for (int i=0; i<resultVector.size(); i++) {
+        cout << resultVector[i] << " ";
+    }
+
+    cout << endl;
+
+    int pairSumTestArr[] = {1, 2, 3, 4, 5, 6};
+
+    vector<vector<int>> pairSumResult = pairSum(pairSumTestArr, 6, 7);
+
+    for (int i=0; i<pairSumResult.size(); i++) {
+        for (int j=0; j<pairSumResult[i].size(); j++) {
+            cout << pairSumResult[i][j] << ", ";
+        }
+        cout << endl;
+    }
 
     cout << endl;
 
